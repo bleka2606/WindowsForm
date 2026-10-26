@@ -12,6 +12,8 @@ namespace WindowsFormsApp4
 {
     public partial class Form2 : Form
     {
+        double num1 = 0;
+        double num2 = 0;
         public Form2()
         {
             InitializeComponent();
@@ -22,102 +24,46 @@ namespace WindowsFormsApp4
 
         }
 
+        private void GetUserValue()
+        {
+            if (this.textBox1.Text.Trim().Length <= 0 || this.textBox2.Text.Trim().Length <= 0)
+                throw new Exception("Поле пусте");
+
+            num1 = Convert.ToDouble(textBox1.Text.Trim());
+            num2 = Convert.ToDouble(textBox2.Text.Trim());
+        }
+
+        private void ShowResult(double value)
+        {
+            label1.Text = "Відповіть: " + value.ToString();
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            try { 
-            if (this.textBox1.Text.Trim().Length <= 0 || this.textBox2.Text.Trim().Length <= 0)
-            {
-                MessageBox.Show("Поле пусте", "ПОМИЛКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            double num1 = Convert.ToDouble(textBox1.Text);
-            double num2 = Convert.ToDouble(textBox2.Text);
-
-            double result = num1 + num2;
-            label1.Text = "Відповіть: " + result.ToString();
-        }
-            catch
-            {
-                Exception ex = new Exception();
-                MessageBox.Show(ex.ToString());
-            }
+            GetUserValue();
+            ShowResult(num1 + num2);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            try {
-                if (this.textBox1.Text.Trim().Length <= 0 || this.textBox2.Text.Trim().Length <= 0)
-                {
-                    MessageBox.Show("Поле пусте", "ПОМИЛКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                double num1 = Convert.ToDouble(textBox1.Text);
-                double num2 = Convert.ToDouble(textBox2.Text);
-
-                double result = num1 - num2;
-                label1.Text = "Відповіть: " + result.ToString();
-            }
-            catch
-            {
-                Exception ex = new Exception();
-                MessageBox.Show(ex.ToString());
-            }
+            GetUserValue();
+            ShowResult(num1 - num2);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            try {
-                if (this.textBox1.Text.Trim().Length <= 0 || this.textBox2.Text.Trim().Length <= 0)
-                {
-                    MessageBox.Show("Поле пусте", "ПОМИЛКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                double num1 = Convert.ToDouble(textBox1.Text);
-                double num2 = Convert.ToDouble(textBox2.Text);
-
-                double result = num1 * num2;
-                label1.Text = "Відповіть: " + result.ToString();
-                }
-            catch
-            {
-                Exception ex = new Exception();
-                MessageBox.Show(ex.ToString());
-            }
+            GetUserValue();
+            ShowResult(num1 * num2);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (this.textBox1.Text.Trim().Length <= 0 || this.textBox2.Text.Trim().Length <= 0)
-                {
-                    MessageBox.Show("Поле пусте", "ПОМИЛКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+            GetUserValue();
+            if (num2 == 0)
+                throw new Exception("Ділення на нуль неможливе");
+            else
+                ShowResult(num1 / num2);
 
-                double num1 = Convert.ToDouble(textBox1.Text);
-                double num2 = Convert.ToDouble(textBox2.Text);
-                if (num2 == 0)
-                {
-                    MessageBox.Show("Ділення на нуль неможливе", "ПОМИЛКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                }
-                else
-
-                {
-                    double result = num1 / num2;
-                    label1.Text = "Відповіть: " + result.ToString();
-                }
-            }
-            catch
-            {
-                Exception ex = new Exception();
-                MessageBox.Show(ex.ToString());
-            }
-            
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -130,7 +76,6 @@ namespace WindowsFormsApp4
         private void Form2_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
-            
         }
     }
 }

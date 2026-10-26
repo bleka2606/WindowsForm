@@ -19,7 +19,12 @@ namespace WindowsFormsApp4
         }
          private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(textBox1.Text);
+            if (this.textBox1.Text.Trim().Length <= 0)
+            {
+                MessageBox.Show("Поле пусте", "ПОМИЛКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+                MessageBox.Show(textBox1.Text);
         }
 
         private void button2_Click(object sender, EventArgs e)
